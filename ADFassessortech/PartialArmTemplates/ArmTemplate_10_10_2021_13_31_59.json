@@ -1,0 +1,129 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADFassessortech"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Busca DemGer')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Busca DemGer",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "PostgreSqlSource"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"dataIntegrationUnits": 2,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "id_dem_ger",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "id_dem_ger",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "id_tipo_dem_ger",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "id_tipo_dem_ger"
+										}
+									},
+									{
+										"source": {
+											"name": "cnpj_estab_tot",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cnpj_estab_tot"
+										}
+									},
+									{
+										"source": {
+											"name": "cod_tot",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cod_tot"
+										}
+									},
+									{
+										"source": {
+											"name": "classif_tot",
+											"type": "String"
+										},
+										"sink": {
+											"name": "classif_tot"
+										}
+									},
+									{
+										"source": {
+											"name": "nivel_tot",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "nivel_tot"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DW_ACCOUNTING_ANALYSIS",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "sql_azure_dem_ger",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2021-09-27T11:26:49Z"
+			},
+			"dependsOn": []
+		}
+	]
+}
