@@ -1,0 +1,9 @@
+{
+	"name": "ADFassessortech",
+	"location": "brazilsouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "daa14abf-f610-4aea-9a5f-9c2d66898ffc",
+		"tenantId": "37ac6d50-be3f-4d7c-b162-510000e039c6"
+	}
+}

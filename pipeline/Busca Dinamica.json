@@ -1,0 +1,138 @@
+{
+	"name": "Busca Dinamica",
+	"properties": {
+		"activities": [
+			{
+				"name": "DadosDW",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "id_dem_ger",
+									"type": "String",
+									"physicalType": "nchar"
+								},
+								"sink": {
+									"name": "id_dem_ger",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "id_tipo_dem_ger",
+									"type": "String",
+									"physicalType": "nchar"
+								},
+								"sink": {
+									"name": "id_tipo_dem_ger",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "cnpj_estab_tot",
+									"type": "String",
+									"physicalType": "nchar"
+								},
+								"sink": {
+									"name": "cnpj_estab_tot",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "cod_tot",
+									"type": "String",
+									"physicalType": "nchar"
+								},
+								"sink": {
+									"name": "cod_tot",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "classif_tot",
+									"type": "String",
+									"physicalType": "nchar"
+								},
+								"sink": {
+									"name": "classif_tot",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "nivel_tot",
+									"type": "String",
+									"physicalType": "nchar"
+								},
+								"sink": {
+									"name": "nivel_tot",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "sqldb_azure_dw",
+						"type": "DatasetReference",
+						"parameters": {
+							"pDataBaseSchema": "dbo",
+							"pDataBaseTable": "sql_azure_dem_ger"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqldb_azure_dw",
+						"type": "DatasetReference",
+						"parameters": {
+							"pDataBaseSchema": "dbo",
+							"pDataBaseTable": "tb_dem_gerenciais"
+						}
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-10-02T14:42:43Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

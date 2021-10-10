@@ -1,0 +1,17 @@
+{
+	"name": "DW_ACCOUNTING_ANALYSIS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DW_ACCOUNTING_ANALYSIS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "PostgreSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "public",
+			"table": "dem_ger"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

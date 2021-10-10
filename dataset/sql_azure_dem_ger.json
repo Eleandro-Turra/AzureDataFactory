@@ -1,0 +1,17 @@
+{
+	"name": "sql_azure_dem_ger",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADFassessortech_SQL_Azure",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sql_azure_dem_ger"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

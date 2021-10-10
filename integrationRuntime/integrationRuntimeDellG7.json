@@ -1,0 +1,6 @@
+{
+	"name": "integrationRuntimeDellG7",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

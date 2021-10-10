@@ -1,0 +1,88 @@
+{
+	"name": "ADFassessortech_SQL_Express",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADFassessortech_SQL_Express",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "id_dem_ger",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "id_tipo_dem_ger",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "cnpj_estab_tot",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cod_tot",
+				"type": "nvarchar"
+			},
+			{
+				"name": "classif_tot",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nivel_tot",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "tot_titulo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tp_totalizacao",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cod_tot_descarga",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nome_tot",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cod_nat",
+				"type": "nvarchar"
+			},
+			{
+				"name": "obs",
+				"type": "nvarchar"
+			},
+			{
+				"name": "inf1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "inf2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "inf3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "inf4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "inf5",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dem_ger"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

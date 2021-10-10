@@ -1,0 +1,16 @@
+{
+	"name": "sc00_empresas",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "JBCepilWin",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OdbcTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "\"SC00_EMPRESA\""
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

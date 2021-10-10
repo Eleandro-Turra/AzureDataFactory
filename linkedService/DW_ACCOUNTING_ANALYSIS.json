@@ -1,0 +1,16 @@
+{
+	"name": "DW_ACCOUNTING_ANALYSIS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "PostgreSql",
+		"typeProperties": {
+			"connectionString": "host=localhost;port=5432;database=DW_ACCOUNTING_ANALYSIS;uid=postgres;encryptionmethod=0",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2YmM2YzBhYy04ZWU0LTRhYmUtOWFkOS1lNGM3OGU3ZTBhNWIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntimeDellG7",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

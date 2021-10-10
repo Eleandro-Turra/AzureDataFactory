@@ -1,0 +1,21 @@
+{
+	"name": "JBCepilWin",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Odbc",
+		"typeProperties": {
+			"connectionString": {
+				"type": "SecureString",
+				"value": "**********"
+			},
+			"authenticationType": "Basic",
+			"userName": "franqdba",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhYmM2MTE2Zi00ZTdlLTQ1YjQtYmQ0Yy1iN2Q0ZjRlMDEzMGEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntimeDellG7",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

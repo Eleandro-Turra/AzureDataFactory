@@ -1,0 +1,25 @@
+{
+	"name": "AtualizacaoDiaria",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Busca DemGer",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 12,
+				"startTime": "2021-09-27T00:00:00Z",
+				"endTime": "2021-09-30T13:00:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

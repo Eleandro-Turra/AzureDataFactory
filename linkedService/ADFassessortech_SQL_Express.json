@@ -1,0 +1,17 @@
+{
+	"name": "ADFassessortech_SQL_Express",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=ELEANDRO\\SQLEXPRESS01;initial catalog=ADFassessortech",
+			"userName": "eleandro\\eleandro.turra",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhMzQzNTcwOC1hMjgzLTQxNzctOWMxNS03NDhlY2MzY2I2NTkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntimeDellG7",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
