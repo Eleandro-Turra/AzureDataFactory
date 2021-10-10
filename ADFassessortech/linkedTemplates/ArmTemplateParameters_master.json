@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADFassessortech"
+		},
+		"ADFassessortech_SQL_Azure_connectionString": {
+			"value": ""
+		},
+		"ADFassessortech_SQL_Express_connectionString": {
+			"value": ""
+		},
+		"ADFassessortech_SQL_Express_password": {
+			"value": ""
+		},
+		"DW_ACCOUNTING_ANALYSIS_connectionString": {
+			"value": ""
+		},
+		"DadosAssessorTech_password": {
+			"value": ""
+		},
+		"JBCepilWin_connectionString": {
+			"value": ""
+		},
+		"JBCepilWin_password": {
+			"value": ""
+		},
+		"ADFassessortech_SQL_Express_properties_typeProperties_userName": {
+			"value": "eleandro\\eleandro.turra"
+		},
+		"DadosAssessorTech_properties_typeProperties_host": {
+			"value": "D:\\Dados\\assessortech.com.br\\"
+		},
+		"DadosAssessorTech_properties_typeProperties_userId": {
+			"value": "eleandro\\eleandro.turra"
+		},
+		"JBCepilWin_properties_typeProperties_userName": {
+			"value": "franqdba"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

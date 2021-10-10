@@ -1,0 +1,119 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADFassessortech"
+		},
+		"ADFassessortech_SQL_Azure_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ADFassessortech_SQL_Azure'"
+		},
+		"ADFassessortech_SQL_Express_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ADFassessortech_SQL_Express'"
+		},
+		"ADFassessortech_SQL_Express_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ADFassessortech_SQL_Express'"
+		},
+		"DW_ACCOUNTING_ANALYSIS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DW_ACCOUNTING_ANALYSIS'"
+		},
+		"DadosAssessorTech_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DadosAssessorTech'"
+		},
+		"JBCepilWin_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'JBCepilWin'"
+		},
+		"JBCepilWin_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'JBCepilWin'"
+		},
+		"ADFassessortech_SQL_Express_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "eleandro\\eleandro.turra"
+		},
+		"DadosAssessorTech_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "D:\\Dados\\assessortech.com.br\\"
+		},
+		"DadosAssessorTech_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "eleandro\\eleandro.turra"
+		},
+		"JBCepilWin_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "franqdba"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ADFassessortech_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ADFassessortech_SQL_Azure_connectionString": {
+						"value": "[parameters('ADFassessortech_SQL_Azure_connectionString')]"
+					},
+					"ADFassessortech_SQL_Express_connectionString": {
+						"value": "[parameters('ADFassessortech_SQL_Express_connectionString')]"
+					},
+					"ADFassessortech_SQL_Express_password": {
+						"value": "[parameters('ADFassessortech_SQL_Express_password')]"
+					},
+					"DW_ACCOUNTING_ANALYSIS_connectionString": {
+						"value": "[parameters('DW_ACCOUNTING_ANALYSIS_connectionString')]"
+					},
+					"DadosAssessorTech_password": {
+						"value": "[parameters('DadosAssessorTech_password')]"
+					},
+					"JBCepilWin_connectionString": {
+						"value": "[parameters('JBCepilWin_connectionString')]"
+					},
+					"JBCepilWin_password": {
+						"value": "[parameters('JBCepilWin_password')]"
+					},
+					"ADFassessortech_SQL_Express_properties_typeProperties_userName": {
+						"value": "[parameters('ADFassessortech_SQL_Express_properties_typeProperties_userName')]"
+					},
+					"DadosAssessorTech_properties_typeProperties_host": {
+						"value": "[parameters('DadosAssessorTech_properties_typeProperties_host')]"
+					},
+					"DadosAssessorTech_properties_typeProperties_userId": {
+						"value": "[parameters('DadosAssessorTech_properties_typeProperties_userId')]"
+					},
+					"JBCepilWin_properties_typeProperties_userName": {
+						"value": "[parameters('JBCepilWin_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

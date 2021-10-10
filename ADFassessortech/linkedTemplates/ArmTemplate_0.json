@@ -1,0 +1,779 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADFassessortech"
+		},
+		"ADFassessortech_SQL_Azure_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ADFassessortech_SQL_Azure'"
+		},
+		"ADFassessortech_SQL_Express_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ADFassessortech_SQL_Express'"
+		},
+		"ADFassessortech_SQL_Express_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ADFassessortech_SQL_Express'"
+		},
+		"DW_ACCOUNTING_ANALYSIS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DW_ACCOUNTING_ANALYSIS'"
+		},
+		"DadosAssessorTech_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DadosAssessorTech'"
+		},
+		"JBCepilWin_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'JBCepilWin'"
+		},
+		"JBCepilWin_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'JBCepilWin'"
+		},
+		"ADFassessortech_SQL_Express_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "eleandro\\eleandro.turra"
+		},
+		"DadosAssessorTech_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "D:\\Dados\\assessortech.com.br\\"
+		},
+		"DadosAssessorTech_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "eleandro\\eleandro.turra"
+		},
+		"JBCepilWin_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "franqdba"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ADFassessortech_SQL_Azure')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('ADFassessortech_SQL_Azure_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntimeDellG7')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sql_azure_dem_ger')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADFassessortech_SQL_Azure",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "sql_azure_dem_ger"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADFassessortech_SQL_Azure')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sqldb_azure_dw')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADFassessortech_SQL_Azure",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"pDataBaseSchema": {
+						"type": "string"
+					},
+					"pDataBaseTable": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Dataset Dinamicos"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().pDataBaseSchema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().pDataBaseTable",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADFassessortech_SQL_Azure')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADFassessortech_SQL_Express')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('ADFassessortech_SQL_Express_connectionString')]",
+					"userName": "[parameters('ADFassessortech_SQL_Express_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('ADFassessortech_SQL_Express_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntimeDellG7",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntimeDellG7')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DW_ACCOUNTING_ANALYSIS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "PostgreSql",
+				"typeProperties": {
+					"connectionString": "[parameters('DW_ACCOUNTING_ANALYSIS_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntimeDellG7",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntimeDellG7')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DadosAssessorTech')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('DadosAssessorTech_properties_typeProperties_host')]",
+					"userId": "[parameters('DadosAssessorTech_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DadosAssessorTech_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntimeDellG7",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntimeDellG7')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JBCepilWin')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Odbc",
+				"typeProperties": {
+					"connectionString": {
+						"type": "SecureString",
+						"value": "[parameters('JBCepilWin_connectionString')]"
+					},
+					"authenticationType": "Basic",
+					"userName": "[parameters('JBCepilWin_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('JBCepilWin_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntimeDellG7",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntimeDellG7')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Busca Dinamica')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DadosDW",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "id_dem_ger",
+											"type": "String",
+											"physicalType": "nchar"
+										},
+										"sink": {
+											"name": "id_dem_ger",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "id_tipo_dem_ger",
+											"type": "String",
+											"physicalType": "nchar"
+										},
+										"sink": {
+											"name": "id_tipo_dem_ger",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "cnpj_estab_tot",
+											"type": "String",
+											"physicalType": "nchar"
+										},
+										"sink": {
+											"name": "cnpj_estab_tot",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "cod_tot",
+											"type": "String",
+											"physicalType": "nchar"
+										},
+										"sink": {
+											"name": "cod_tot",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "classif_tot",
+											"type": "String",
+											"physicalType": "nchar"
+										},
+										"sink": {
+											"name": "classif_tot",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "nivel_tot",
+											"type": "String",
+											"physicalType": "nchar"
+										},
+										"sink": {
+											"name": "nivel_tot",
+											"type": "String",
+											"physicalType": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "sqldb_azure_dw",
+								"type": "DatasetReference",
+								"parameters": {
+									"pDataBaseSchema": "dbo",
+									"pDataBaseTable": "sql_azure_dem_ger"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "sqldb_azure_dw",
+								"type": "DatasetReference",
+								"parameters": {
+									"pDataBaseSchema": "dbo",
+									"pDataBaseTable": "tb_dem_gerenciais"
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-02T14:42:43Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/sqldb_azure_dw')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADFassessortech_SQL_Express')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADFassessortech_SQL_Express",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "id_dem_ger",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "id_tipo_dem_ger",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "cnpj_estab_tot",
+						"type": "nvarchar"
+					},
+					{
+						"name": "cod_tot",
+						"type": "nvarchar"
+					},
+					{
+						"name": "classif_tot",
+						"type": "nvarchar"
+					},
+					{
+						"name": "nivel_tot",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "tot_titulo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "tp_totalizacao",
+						"type": "nvarchar"
+					},
+					{
+						"name": "cod_tot_descarga",
+						"type": "nvarchar"
+					},
+					{
+						"name": "nome_tot",
+						"type": "nvarchar"
+					},
+					{
+						"name": "cod_nat",
+						"type": "nvarchar"
+					},
+					{
+						"name": "obs",
+						"type": "nvarchar"
+					},
+					{
+						"name": "inf1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "inf2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "inf3",
+						"type": "nvarchar"
+					},
+					{
+						"name": "inf4",
+						"type": "nvarchar"
+					},
+					{
+						"name": "inf5",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "dem_ger"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADFassessortech_SQL_Express')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DW_ACCOUNTING_ANALYSIS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DW_ACCOUNTING_ANALYSIS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "PostgreSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "public",
+					"table": "dem_ger"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DW_ACCOUNTING_ANALYSIS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sc00_empresas')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "JBCepilWin",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OdbcTable",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "\"SC00_EMPRESA\""
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/JBCepilWin')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Busca DemGer')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Busca DemGer",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "PostgreSqlSource"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"dataIntegrationUnits": 2,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "id_dem_ger",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "id_dem_ger",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "id_tipo_dem_ger",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "id_tipo_dem_ger"
+										}
+									},
+									{
+										"source": {
+											"name": "cnpj_estab_tot",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cnpj_estab_tot"
+										}
+									},
+									{
+										"source": {
+											"name": "cod_tot",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cod_tot"
+										}
+									},
+									{
+										"source": {
+											"name": "classif_tot",
+											"type": "String"
+										},
+										"sink": {
+											"name": "classif_tot"
+										}
+									},
+									{
+										"source": {
+											"name": "nivel_tot",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "nivel_tot"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DW_ACCOUNTING_ANALYSIS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "sql_azure_dem_ger",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Busca DemGer_copy1",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Busca DemGer",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "PostgreSqlSource"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"dataIntegrationUnits": 2,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "id_dem_ger",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "id_dem_ger",
+											"physicalType": "nchar"
+										}
+									},
+									{
+										"source": {
+											"name": "id_tipo_dem_ger",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "id_tipo_dem_ger"
+										}
+									},
+									{
+										"source": {
+											"name": "cnpj_estab_tot",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cnpj_estab_tot"
+										}
+									},
+									{
+										"source": {
+											"name": "cod_tot",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cod_tot"
+										}
+									},
+									{
+										"source": {
+											"name": "classif_tot",
+											"type": "String"
+										},
+										"sink": {
+											"name": "classif_tot"
+										}
+									},
+									{
+										"source": {
+											"name": "nivel_tot",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "nivel_tot"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DW_ACCOUNTING_ANALYSIS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "sql_azure_dem_ger",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-27T11:26:49Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DW_ACCOUNTING_ANALYSIS')]",
+				"[concat(variables('factoryId'), '/datasets/sql_azure_dem_ger')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AtualizacaoDiaria')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Busca DemGer",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Hour",
+						"interval": 12,
+						"startTime": "2021-09-27T00:00:00Z",
+						"endTime": "2021-09-30T13:00:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Busca DemGer')]"
+			]
+		}
+	]
+}
