@@ -1,0 +1,21 @@
+{
+	"name": "DBERPSOFT",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Odbc",
+		"typeProperties": {
+			"connectionString": {
+				"type": "SecureString",
+				"value": "**********"
+			},
+			"authenticationType": "Basic",
+			"userName": "sysdba",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkYzRhOTFmMS0wZjI4LTRkN2UtOGI2Yy01NDRhMzk2MDVmYmYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntimeDellG7",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
