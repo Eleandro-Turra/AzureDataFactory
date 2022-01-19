@@ -1,0 +1,369 @@
+{
+	"name": "Busca DBERPSOFT_VW_BI_BASE",
+	"properties": {
+		"activities": [
+			{
+				"name": "DadosDW",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OdbcSource",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "NRONOTA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NRONOTA",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DIVISAOID",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "DIVISAOID",
+									"type": "Int16",
+									"physicalType": "Int16"
+								}
+							},
+							{
+								"source": {
+									"name": "DATAFATURAMENTO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DATAFATURAMENTO",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PESSOAID",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "PESSOAID",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "REPRESENTANTEID",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "REPRESENTANTEID",
+									"type": "Int32",
+									"physicalType": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "TIPONOTAID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TIPONOTAID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ITEMID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ITEMID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QUANTIDADE",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "QUANTIDADE",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VALORPRODUTO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VALORPRODUTO",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "RECEITABRUTA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "RECEITABRUTA",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "RECEITALIQUIDA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "RECEITALIQUIDA",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "TOTALNOTA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "TOTALNOTA",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VALORCOMISSAO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VALORCOMISSAO",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "PRAZOMEDIO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PRAZOMEDIO",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VALORICMS",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VALORICMS",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VALORFCP",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VALORFCP",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VALORIPI",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VALORIPI",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VALORICMSST",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VALORICMSST",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VALORPISCOFINS",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VALORPISCOFINS",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CUSTOMATERIAIS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "CUSTOMATERIAIS",
+									"type": "Double",
+									"physicalType": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "CUSTOMOBRA",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "CUSTOMOBRA",
+									"type": "Double",
+									"physicalType": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "FRETE",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "FRETE",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "OUTROSIMPOSTOS",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "OUTROSIMPOSTOS",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "ROYALTIES",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ROYALTIES",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CUSTOADMINISTRATIVO",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CUSTOADMINISTRATIVO",
+									"type": "Decimal",
+									"physicalType": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "OUTROSCUSTOS",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "OUTROSCUSTOS",
+									"type": "Double",
+									"physicalType": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "FINALIDADE_EMISSAO",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "FINALIDADE_EMISSAO",
+									"type": "Int16",
+									"physicalType": "Int16"
+								}
+							},
+							{
+								"source": {
+									"name": "IDENTIFICACAO_OPERACAO",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "IDENTIFICACAO_OPERACAO",
+									"type": "Int16",
+									"physicalType": "Int16"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DBERPSOFT_VW_BI_BASE",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqldb_azure_dw",
+						"type": "DatasetReference",
+						"parameters": {
+							"pDataBaseSchema": "dbo",
+							"pDataBaseTable": "dberpsoft_vw_bi_base"
+						}
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-10-02T14:42:43Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
