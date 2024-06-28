@@ -1,0 +1,9 @@
+{
+	"name": "adfAssessorTechTestesEleandro",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f92bdb02-95de-4ba4-8925-3c99672cbb78",
+		"tenantId": "37ac6d50-be3f-4d7c-b162-510000e039c6"
+	}
+}
