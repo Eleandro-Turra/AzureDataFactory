@@ -1,0 +1,9 @@
+{
+	"name": "adfAssessorTech001",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6f6e779d-05b1-4031-ae51-c0b666b569df",
+		"tenantId": "37ac6d50-be3f-4d7c-b162-510000e039c6"
+	}
+}
