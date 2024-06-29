@@ -1,0 +1,87 @@
+{
+	"name": "webApiRobopac",
+	"properties": {
+		"activities": [
+			{
+				"name": "Online",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"url": "http://api.robopac.com.br:8993/api/Teste/Online"
+				}
+			},
+			{
+				"name": "SignIn",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Online",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "http://api.robopac.com.br:8993/api/Auth/signin",
+					"body": {
+						"senha": "consulta_xml",
+						"usuario": "consulta_xml"
+					}
+				}
+			},
+			{
+				"name": "Cidade",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "SignIn",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"headers": {
+						"Authorization": {
+							"value": "@concat('Bearer ', activity('SignIn').output.accessToken)",
+							"type": "Expression"
+						}
+					},
+					"url": "http://api.robopac.com.br:8993/api/Cidade",
+					"body": {
+						"senha": "consulta_xml",
+						"usuario": "consulta_xml"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
